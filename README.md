@@ -1,8 +1,97 @@
-# `BlockVerse`
+# BlockVerse
 
-Welcome to your new `BlockVerse` project and to the Internet Computer development community. By default, creating a new project adds this README and some template files to your project directory. You can edit these template files to customize your project and to include your own code to speed up the development cycle.
+A fully on-chain social media platform built on the Internet Computer Protocol (ICP) that ensures user data sovereignty, censorship resistance, and integrates microtransactions for content creators.
 
-To get started, you might want to explore the project directory structure and the default configuration file. Working with this project in your development environment will not affect any production deployment or identity tokens.
+## 🌟 Features
+- Decentralized Identity: User authentication via Internet Identity
+- On-Chain Data Storage: All posts, comments, and user data stored on-chain
+- Microtransactions: Tip creators with ICP tokens
+- Censorship Resistant: No central authority can remove content
+- Data Sovereignty: Users own their data completely
+- Real-time Updates: Live feed updates using WebSocket connections
+- Media Support: Image and video uploads stored on-chain
+- Social Features: Follow, like, comment, share functionality
+
+## 🏗️ Architecture
+
+```
+BlockVerse/
+├── backend/                    # Rust Canister Backend
+│   ├── src/
+│   │   ├── lib.rs             # Main canister entry point
+│   │   ├── models/            # Data models
+│   │   │   ├── mod.rs
+│   │   │   ├── user.rs        # User model
+│   │   │   ├── post.rs        # Post model
+│   │   │   └── comment.rs     # Comment model
+│   │   ├── services/          # Business logic
+│   │   │   ├── mod.rs
+│   │   │   ├── user_service.rs
+│   │   │   ├── post_service.rs
+│   │   │   ├── comment_service.rs
+│   │   │   └── payment_service.rs
+│   │   ├── storage/           # State management
+│   │   │   ├── mod.rs
+│   │   │   └── state.rs
+│   │   └── utils/             # Utility functions
+│   │       ├── mod.rs
+│   │       ├── crypto.rs
+│   │       └── validation.rs
+│   ├── Cargo.toml
+│   └── dfx.json
+├── frontend/                   # React Frontend
+│   ├── public/
+│   │   ├── index.html
+│   │   └── manifest.json
+│   ├── src/
+│   │   ├── components/        # React components
+│   │   │   ├── common/        # Reusable components
+│   │   │   │   ├── Header.jsx
+│   │   │   │   ├── Sidebar.jsx
+│   │   │   │   ├── LoadingSpinner.jsx
+│   │   │   │   └── Modal.jsx
+│   │   │   ├── auth/          # Authentication components
+│   │   │   │   ├── LoginButton.jsx
+│   │   │   │   └── AuthGuard.jsx
+│   │   │   ├── feed/          # Feed related components
+│   │   │   │   ├── Feed.jsx
+│   │   │   │   ├── PostCard.jsx
+│   │   │   │   ├── CreatePost.jsx
+│   │   │   │   └── PostDetails.jsx
+│   │   │   ├── profile/       # Profile components
+│   │   │   │   ├── ProfilePage.jsx
+│   │   │   │   ├── EditProfile.jsx
+│   │   │   │   └── FollowButton.jsx
+│   │   │   └── payments/      # Payment components
+│   │   │       ├── TipButton.jsx
+│   │   │       └── WalletBalance.jsx
+│   │   ├── services/          # API services
+│   │   │   ├── api.js         # Main API service
+│   │   │   ├── auth.js        # Authentication service
+│   │   │   └── payments.js    # Payment service
+│   │   ├── hooks/             # Custom React hooks
+│   │   │   ├── useAuth.js
+│   │   │   ├── usePosts.js
+│   │   │   └── useWebSocket.js
+│   │   ├── context/           # React context
+│   │   │   ├── AuthContext.jsx
+│   │   │   └── ThemeContext.jsx
+│   │   ├── utils/             # Utility functions
+│   │   │   ├── constants.js
+│   │   │   ├── helpers.js
+│   │   │   └── formatters.js
+│   │   ├── styles/            # CSS styles
+│   │   │   ├── globals.css
+│   │   │   ├── components.css
+│   │   │   └── themes.css
+│   │   ├── App.jsx            # Main App component
+│   │   └── index.js           # Entry point
+│   ├── package.json
+│   └── webpack.config.js
+├── .gitignore
+├── README.md
+└── deploy.sh                  # Deployment script
+```
 
 To learn more before you start working with `BlockVerse`, see the following documentation available online:
 

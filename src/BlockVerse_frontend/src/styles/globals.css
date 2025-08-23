@@ -1,0 +1,195 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slide-in {
+    animation: slideIn 0.3s ease-out;
+}
+
+/* Custom gradient text */
+.gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Glass morphism effect */
+.glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Dark theme overrides */
+.dark {
+    color-scheme: dark;
+}
+
+/* Light theme styles */
+.light {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+}
+
+.light .bg-gray-900 {
+    background-color: var(--bg-primary) !important;
+}
+
+.light .bg-gray-800 {
+    background-color: var(--bg-secondary) !important;
+}
+
+.light .text-white {
+    color: var(--text-primary) !important;
+}
+
+.light .text-gray-400 {
+    color: var(--text-secondary) !important;
+}
+
+.light .border-gray-700 {
+    border-color: var(--border-color) !important;
+}
+
+/* Focus styles */
+.focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900;
+}
+
+/* Hover effects */
+.hover-lift {
+    transition: transform 0.2s ease-out;
+}
+
+.hover-lift:hover {
+    transform: translateY(-2px);
+}
+
+/* Loading states */
+.loading-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Toast notifications */
+.Toastify__toast-container {
+    z-index: 9999;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .mobile-padding {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .mobile-text {
+        font-size: 0.875rem;
+    }
+}
+
+/* Custom button styles */
+.btn-primary {
+    @apply bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors focus-ring;
+}
+
+.btn-secondary {
+    @apply bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors focus-ring;
+}
+
+.btn-outline {
+    @apply border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white font-semibold py-2 px-4 rounded-lg transition-colors focus-ring;
+}
+
+/* Input styles */
+.input-primary {
+    @apply bg-gray-700 text-white placeholder-gray-400 px-4 py-2 rounded-lg border border-gray-600 focus:border-purple-500 focus:outline-none transition-colors;
+}
+
+/* Card styles */
+.card {
+    @apply bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-gray-600 transition-colors;
+}
+
+/* Typography */
+.heading-1 {
+    @apply text-3xl font-bold text-white mb-6;
+}
+
+.heading-2 {
+    @apply text-2xl font-semibold text-white mb-4;
+}
+
+.heading-3 {
+    @apply text-xl font-medium text-white mb-3;
+}
+
+.body-text {
+    @apply text-gray-300 leading-relaxed;
+}
+
+.small-text {
+    @apply text-sm text-gray-400;
+}
