@@ -1,0 +1,27 @@
+{
+  "canisters": {
+    "BlockVerse_backend": {
+      "candid": "src/BlockVerse_backend/BlockVerse_backend.did",
+      "package": "BlockVerse_backend",
+      "type": "rust"
+    },
+    "BlockVerse_frontend": {
+      "dependencies": [
+        "BlockVerse_backend"
+      ],
+      "source": [
+        "src/BlockVerse_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "BlockVerse_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}

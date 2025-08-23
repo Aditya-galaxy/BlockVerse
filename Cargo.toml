@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "src/BlockVerse_backend"
+]
+resolver = "2"
