@@ -11,19 +11,24 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
-    const [theme, setTheme] = useState('dark');
+    const [theme, setTheme] = useState('light');
 
     useEffect(() => {
         const savedTheme = localStorage.getItem('blockverse-theme');
         if (savedTheme) {
             setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
         }
     }, []);
 
+    useEffect(() => {
+        localStorage.setItem('blockverse-theme', theme);
+        document.documentElement.setAttribute('data-theme', theme);
+    }, [theme]);
+
     const toggleTheme = () => {
-        const newTheme = theme === 'dark' ? 'light' : 'dark';
-        setTheme(newTheme);
-        localStorage.setItem('blockverse-theme', newTheme);
+        setTheme(prev => prev === 'light' ? 'dark' : 'light');
     };
 
     const value = {
@@ -34,9 +39,7 @@ export const ThemeProvider = ({ children }) => {
 
     return (
         <ThemeContext.Provider value={value}>
-            <div className={theme}>
-                {children}
-            </div>
+            {children}
         </ThemeContext.Provider>
     );
 };

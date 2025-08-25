@@ -224,3 +224,5 @@ const idlFactory = ({ IDL }) => {
         'tip_user': IDL.Func([IDL.Principal, IDL.Nat64], [IDL.Variant({ 'Ok': IDL.Null, 'Err': IDL.Text })], []),
     });
 };
+
+export default AuthContext;

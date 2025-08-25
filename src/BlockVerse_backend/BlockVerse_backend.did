@@ -1,3 +1,80 @@
+type User = record {
+  id: principal;
+  username: text;
+  bio: text;
+  avatar_url: text;
+  followers_count: nat64;
+  following_count: nat64;
+  posts_count: nat64;
+  balance: nat64;
+  created_at: nat64;
+  updated_at: nat64;
+};
+
+type Post = record {
+  id: text;
+  author: principal;
+  content: text;
+  media_url: opt text;
+  likes_count: nat64;
+  comments_count: nat64;
+  shares_count: nat64;
+  is_shared: bool;
+  original_post_id: opt text;
+  share_comment: opt text;
+  created_at: nat64;
+  updated_at: nat64;
+};
+
+type Comment = record {
+  id: text;
+  post_id: text;
+  author: principal;
+  content: text;
+  likes_count: nat64;
+  created_at: nat64;
+};
+
+type Result_User = variant { Ok: User; Err: text };
+type Result_Post = variant { Ok: Post; Err: text };
+type Result_Comment = variant { Ok: Comment; Err: text };
+type Result = variant { Ok; Err: text };
+
 service : {
-    "greet": (text) -> (text) query;
+  // User Management
+  create_user: (text, text, text) -> (Result_User);
+  get_user: (principal) -> (opt User) query;
+  update_user: (text, text) -> (Result_User);
+  follow_user: (principal) -> (Result);
+  unfollow_user: (principal) -> (Result);
+  get_user_followers: (principal) -> (vec principal) query;
+  get_user_following: (principal) -> (vec principal) query;
+  
+  // Post Management
+  create_post: (text, opt text) -> (Result_Post);
+  get_post: (text) -> (opt Post) query;
+  get_user_posts: (principal) -> (vec Post) query;
+  get_feed: (principal, nat64, nat64) -> (vec Post) query;
+  like_post: (text) -> (Result);
+  unlike_post: (text) -> (Result);
+  share_post: (text, opt text) -> (Result_Post);
+  
+  // Comment Management
+  create_comment: (text, text) -> (Result_Comment);
+  get_post_comments: (text) -> (vec Comment) query;
+  like_comment: (text) -> (Result);
+  
+  // Payment System
+  tip_user: (principal, nat64) -> (Result);
+  get_user_balance: (principal) -> (nat64) query;
+  
+  // Search and Discovery
+  search_users: (text) -> (vec User) query;
+  search_posts: (text) -> (vec Post) query;
+  
+  // Admin Functions
+  remove_post: (text) -> (Result);
+  
+  // Real-time Updates
+  get_latest_posts: (nat64) -> (vec Post) query;
 }

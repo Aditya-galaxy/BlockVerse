@@ -1,35 +1,51 @@
 import React, { useState } from 'react';
-import { LogIn } from 'lucide-react';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../context/AuthContext';
 import LoadingSpinner from '../common/LoadingSpinner';
 
 const LoginButton = () => {
-    const { login } = useAuth();
-    const [isLogging, setIsLogging] = useState(false);
+    const { login, logout, isAuthenticated, user } = useAuth();
+    const [loading, setLoading] = useState(false);
 
     const handleLogin = async () => {
+        setLoading(true);
         try {
-            setIsLogging(true);
             await login();
         } catch (error) {
             console.error('Login failed:', error);
         } finally {
-            setIsLogging(false);
+            setLoading(false);
         }
     };
 
+    const handleLogout = async () => {
+        setLoading(true);
+        try {
+            await logout();
+        } catch (error) {
+            console.error('Logout failed:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (loading) {
+        return <LoadingSpinner size="small" />;
+    }
+
+    if (isAuthenticated) {
+        return (
+            <div className="user-menu">
+                <span className="username">@{user?.username || 'User'}</span>
+                <button onClick={handleLogout} className="logout-btn">
+                    Logout
+                </button>
+            </div>
+        );
+    }
+
     return (
-        <button
-            onClick={handleLogin}
-            disabled={isLogging}
-            className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-            {isLogging ? (
-                <LoadingSpinner size="sm" />
-            ) : (
-                <LogIn className="w-5 h-5" />
-            )}
-            <span>{isLogging ? 'Connecting...' : 'Login with Internet Identity'}</span>
+        <button onClick={handleLogin} className="login-btn">
+            Connect with Internet Identity
         </button>
     );
 };
